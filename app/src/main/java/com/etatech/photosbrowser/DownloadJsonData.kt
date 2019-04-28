@@ -1,14 +1,17 @@
 package com.etatech.photosbrowser
 
 import android.os.AsyncTask
+import android.util.Log
 import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
+import javax.security.auth.callback.Callback
 
-class DownloadJsonData : AsyncTask<String,Void,String>() {
+class DownloadJsonData(private val listener:OnDaownloadComplete) : AsyncTask<String,Void,String>() {
 
     private val TAG = "DownloadJsonData"
     private var downloadStatus = DownloadStatus.IDLE
+//    private var listener : StartActivity? = null
 
     override fun doInBackground(vararg params: String?): String {
 
@@ -39,7 +42,17 @@ class DownloadJsonData : AsyncTask<String,Void,String>() {
         }
     }
 
-    override fun onPostExecute(result: String?) {
-        super.onPostExecute(result)
+    override fun onPostExecute(result: String) {
+//        super.onPostExecute(result) Does not Do Any Thing
+        Log.d(TAG,"onPostExecute Called -> $result")
+        listener?.onDownloadComplete(result,downloadStatus)
+
     }
+
+//    fun onDownloadCompleteListener (callBackObject:StartActivity) {
+//
+//        listener = callBackObject
+//
+//    }
+
 }

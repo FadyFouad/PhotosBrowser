@@ -10,7 +10,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_start.*
 
 
-class StartActivity : AppCompatActivity() {
+class StartActivity : AppCompatActivity(),OnDaownloadComplete {
 
 //    companion object { //static in JAVA
         private val TAG = "StartActivity"
@@ -24,15 +24,27 @@ class StartActivity : AppCompatActivity() {
         Log.d(TAG,"onCreate Called")
 
 
+        val downloadJsonData = DownloadJsonData(this)
+//        downloadJsonData.onDownloadCompleteListener(this)
+        downloadJsonData.execute("https://api.flickr.com/services/feeds/photos_public.gne?tags=android,oreo&format=json&nojsoncallback=1")
 
 
 
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
+        fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
     }
 
+    override fun onDownloadComplete (data:String, status:DownloadStatus){
+
+        if (status == DownloadStatus.OK){
+            Log.d(TAG,"onDownloadComplete -> $data")
+        }else{
+            Log.d(TAG,"Faild To Download $data status -> $status")
+        }
+
+    }
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        menuInflater.inflate(R.menu.menu_start,menu)
 //        return true
