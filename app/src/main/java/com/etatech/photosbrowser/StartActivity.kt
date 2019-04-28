@@ -10,7 +10,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_start.*
 
 
-class StartActivity : AppCompatActivity(),OnDaownloadComplete {
+class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerData.OnDataAvailable{
 
 //    companion object { //static in JAVA
         private val TAG = "StartActivity"
@@ -26,8 +26,11 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete {
 
         val downloadJsonData = DownloadJsonData(this)
 //        downloadJsonData.onDownloadCompleteListener(this)
-        downloadJsonData.execute("https://api.flickr.com/services/feeds/photos_public.gne?tags=android,oreo&format=json&nojsoncallback=1")
-
+        try {
+            downloadJsonData.execute("https://api.flickr.com/services/feeds/photos_public.gne?tags=android,oreo&format=json&nojsoncallback=1")
+        }catch (e:Exception){
+            Log.d(TAG,e.message)
+        }
 
 
         fab.setOnClickListener { view ->
@@ -40,11 +43,23 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete {
 
         if (status == DownloadStatus.OK){
             Log.d(TAG,"onDownloadComplete -> $data")
+            val downloadData = DownloadFlickerData(this)
+            downloadData.execute(data)
         }else{
             Log.d(TAG,"Faild To Download $data status -> $status")
         }
 
     }
+    override fun onDataAvailable(data: List<Photo>) {
+        Log.d(TAG,"onDataAvailable Called ->$data")
+    }
+
+    override fun OnError(e: java.lang.Exception) {
+        Log.d(TAG,"OnError Called -> ${e.message}")
+
+    }
+
+
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        menuInflater.inflate(R.menu.menu_start,menu)
 //        return true
