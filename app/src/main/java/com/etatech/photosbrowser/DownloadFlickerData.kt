@@ -46,7 +46,7 @@ class DownloadFlickerData(private val listener:OnDataAvailable): AsyncTask<Strin
     }
 
     override fun onPostExecute(result: ArrayList<Photo>) {
-        Log.d(TAG,"onPostExecute Called")
+        Log.d(TAG,"onPostExecute Called -> $result")
         listener.onDataAvailable(result)
     }
 }

@@ -1,5 +1,6 @@
 package com.etatech.photosbrowser
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerDa
 
         val downloadJsonData = DownloadJsonData(this)
 //        downloadJsonData.onDownloadCompleteListener(this)
+        val url = createUri("https://api.flickr.com/services/feeds/photos_public.gne","Android","en-us",true)
         try {
             downloadJsonData.execute("https://api.flickr.com/services/feeds/photos_public.gne?tags=android,oreo&format=json&nojsoncallback=1")
         }catch (e:Exception){
@@ -37,6 +39,21 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerDa
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+    }
+
+    private fun createUri(url: String, search: String,lang : String ,isMatched: Boolean):String{
+        Log.d(TAG,"createUri ->")
+        var uri = Uri.parse(url)
+            .buildUpon()
+            .appendQueryParameter("tags",search)
+            .appendQueryParameter("tagmode",if (isMatched)"ALL" else "ANY")
+            .appendQueryParameter("lang",lang)
+            .appendQueryParameter("format","json")
+            .appendQueryParameter("nojsoncallback","1")
+            .build()
+            .toString()
+        Log.d(TAG,"Url -> $uri")
+        return uri
     }
 
     override fun onDownloadComplete (data:String, status:DownloadStatus){
