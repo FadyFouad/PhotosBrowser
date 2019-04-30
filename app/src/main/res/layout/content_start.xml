@@ -9,4 +9,18 @@
         tools:showIn="@layout/activity_start"
         tools:context=".StartActivity">
 
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/photos_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/photo_layout">
+
+    </android.support.v7.widget.RecyclerView>
+
+
 </android.support.constraint.ConstraintLayout>
