@@ -2,6 +2,7 @@ package com.etatech.photosbrowser
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,10 +27,9 @@ class PhotoAdapter (var context: Context,var photos : List<Photo>  ) : RecyclerV
     }
 
     override fun onBindViewHolder(holder: PhotoAdapter.PhotoViewHolder, position: Int) {
-
         val photo = photos[position]
-
         val photoUrl = photo.link
+        Log.d(TAG,"URL -> $photoUrl")
         Picasso.get()
             .load(photoUrl)
             .placeholder(R.drawable.ic_broken_image)

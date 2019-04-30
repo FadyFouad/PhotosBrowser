@@ -4,26 +4,27 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_start.*
+import kotlinx.android.synthetic.main.content_start.*
 
 
 class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerData.OnDataAvailable{
 
 //    companion object { //static in JAVA
-        private val TAG = "StartActivity"
+    private val TAG = "StartActivity"
 //    }
-
-
+    var photos : MutableList<Photo> = ArrayList()
+    val adapter = PhotoAdapter(this,photos)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 //        setSupportActionBar(toolbar)
         Log.d(TAG,"onCreate Called")
-
 
         val downloadJsonData = DownloadJsonData(this)
 //        downloadJsonData.onDownloadCompleteListener(this)
@@ -33,12 +34,19 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerDa
         }catch (e:Exception){
             Log.d(TAG,e.message)
         }
-
-
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+//        photos.add(Photo("Fady","Fady","Fady","Fady","Fady","Fady","Fady"))
+//        photos.add(Photo("Fady","Fady","Fady","Fady","Fady","Fady","Fady"))
+//        photos.add(Photo("Fady","Fady","Fady","Fady","Fady","Fady","Fady"))
+//        val adapter: PhotoAdapter = PhotoAdapter(this,photos)
+
+        photos_recyclerView.layoutManager = LinearLayoutManager(this)
+        photos_recyclerView.adapter=adapter
+        photos_recyclerView.hasFixedSize()
+
     }
 
     private fun createUri(url: String, search: String,lang : String ,isMatched: Boolean):String{
@@ -69,6 +77,7 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerDa
     }
     override fun onDataAvailable(data: List<Photo>) {
         Log.d(TAG,"onDataAvailable Called ->$data")
+        adapter.loadNewPhoto(data)
     }
 
     override fun OnError(e: java.lang.Exception) {

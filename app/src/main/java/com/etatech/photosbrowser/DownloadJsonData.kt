@@ -45,7 +45,7 @@ class DownloadJsonData(private val listener:OnDaownloadComplete) : AsyncTask<Str
     override fun onPostExecute(result: String) {
 //        super.onPostExecute(result) Does not Do Any Thing
         Log.d(TAG,"onPostExecute Called -> $result")
-        listener?.onDownloadComplete(result,downloadStatus)
+        listener.onDownloadComplete(result,downloadStatus)
 
     }
 
