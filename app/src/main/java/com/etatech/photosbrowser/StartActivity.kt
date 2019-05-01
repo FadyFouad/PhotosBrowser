@@ -8,14 +8,19 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_start.*
 import kotlinx.android.synthetic.main.content_start.*
 
 
-class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerData.OnDataAvailable{
+class StartActivity : AppCompatActivity(),
+    OnDaownloadComplete ,
+    DownloadFlickerData.OnDataAvailable ,
+    RVItemClickLisener.OnItemClick{
 
-//    companion object { //static in JAVA
+    //    companion object { //static in JAVA
     private val TAG = "StartActivity"
 //    }
     var photos : MutableList<Photo> = ArrayList()
@@ -38,19 +43,25 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerDa
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-//        photos.add(Photo("Fady","Fady","Fady","Fady","Fady","Fady","Fady"))
-//        photos.add(Photo("Fady","Fady","Fady","Fady","Fady","Fady","Fady"))
-//        photos.add(Photo("Fady","Fady","Fady","Fady","Fady","Fady","Fady"))
-//        val adapter: PhotoAdapter = PhotoAdapter(this,photos)
-
         photos_recyclerView.layoutManager = LinearLayoutManager(this)
         photos_recyclerView.adapter=adapter
+        photos_recyclerView.addOnItemTouchListener(RVItemClickLisener(this,photos_recyclerView,this))
         photos_recyclerView.hasFixedSize()
 
     }
+    override fun onItemClick(view: View, position: Int) {
+        Log.d(TAG,"onItemClick Called")
+        Toast.makeText(this,"on Click ",Toast.LENGTH_SHORT).show()
+
+    }
+
+    override fun onItemLongClick(view: View, position: Int) {
+        Log.d(TAG,"onItemLongClick Called")
+        Toast.makeText(this,"on Long Click ",Toast.LENGTH_SHORT).show()
+    }
 
     private fun createUri(url: String, search: String,lang : String ,isMatched: Boolean):String{
-        Log.d(TAG,"createUri ->")
+        Log.d(TAG,"createUri -> ")
         var uri = Uri.parse(url)
             .buildUpon()
             .appendQueryParameter("tags",search)
@@ -63,7 +74,6 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerDa
         Log.d(TAG,"Url -> $uri")
         return uri
     }
-
     override fun onDownloadComplete (data:String, status:DownloadStatus){
 
         if (status == DownloadStatus.OK){
@@ -79,7 +89,6 @@ class StartActivity : AppCompatActivity(),OnDaownloadComplete ,DownloadFlickerDa
         Log.d(TAG,"onDataAvailable Called ->$data")
         adapter.loadNewPhoto(data)
     }
-
     override fun OnError(e: java.lang.Exception) {
         Log.d(TAG,"OnError Called -> ${e.message}")
 

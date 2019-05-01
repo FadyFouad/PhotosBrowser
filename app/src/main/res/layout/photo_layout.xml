@@ -4,42 +4,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/photo_item"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/ic_image"
+            android:layout_margin="8dp"
+            android:padding="4dp"/>
 
-            android:adjustViewBounds="true"/>
-
-
-    <TextView
-            android:id="@+id/photo_name_item"
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Photo Name"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@android:color/black"
-            android:layout_toRightOf="@+id/photo_item"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/photo_item">
+        <TextView
+                android:id="@+id/photo_name_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Photo Name"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black"
+                android:layout_toRightOf="@+id/photo_item"/>
 
-    <TextView
-            android:id="@+id/photo_pub_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Photo publisher Name"
-            android:textSize="12sp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@android:color/black"
-            android:layout_toRightOf="@+id/photo_item"
-            android:layout_below="@+id/photo_name_item"/>
+        <TextView
+                android:id="@+id/photo_pub_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Photo publisher Name"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:alpha="0.8"
+                android:textColor="@android:color/black"/>
+    </LinearLayout>
 
 
 </RelativeLayout>
