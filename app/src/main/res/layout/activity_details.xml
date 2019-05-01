@@ -3,51 +3,72 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:context=".DetailsActivity">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="8dp"
-            android:elevation="8dp"
-            android:padding="8dp"
-            app:cardElevation="8dp"
-            app:contentPadding="8dp">
-
-        <LinearLayout
-                android:layout_width="match_parent"
+            android:orientation="vertical">
+        <android.support.design.widget.AppBarLayout
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:theme="@style/AppTheme.AppBarOverlay">
 
-            <TextView
-                    android:id="@+id/photo_name_detail"
+            <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="8dp"
+                android:elevation="8dp"
+                android:padding="8dp"
+                app:cardElevation="8dp"
+                app:contentPadding="8dp">
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name"/>
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/photo_name_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"/>
 
 
-            <ImageView
-                    android:id="@+id/photo_details"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_image"/>
+                <ImageView
+                        android:id="@+id/photo_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_image"/>
 
 
-            <TextView
-                    android:id="@+id/photo_pub_name_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Author"/>
+                <TextView
+                        android:id="@+id/photo_pub_name_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Author"/>
 
-            <TextView
-                    android:id="@+id/photo_desc_detail"
-                    android:layout_width="match_parent"
-                    android:text="description"
-                    android:layout_height="wrap_content"/>
+                <TextView
+                        android:id="@+id/photo_desc_detail"
+                        android:layout_width="match_parent"
+                        android:text="description"
+                        android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 </ScrollView>

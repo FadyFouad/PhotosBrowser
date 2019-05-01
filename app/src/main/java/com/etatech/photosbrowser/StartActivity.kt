@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_start.*
 import kotlinx.android.synthetic.main.content_start.*
 
 
-class StartActivity : AppCompatActivity(),
+class StartActivity : BaseActivity(),
     OnDaownloadComplete ,
     DownloadFlickerData.OnDataAvailable ,
     RVItemClickLisener.OnItemClick{
@@ -28,7 +28,7 @@ class StartActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
-//        setSupportActionBar(toolbar)
+        activateToolBar(false)
         Log.d(TAG,"onCreate Called")
 
         val downloadJsonData = DownloadJsonData(this)
