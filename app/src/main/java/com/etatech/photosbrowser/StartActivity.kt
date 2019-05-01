@@ -1,5 +1,6 @@
 package com.etatech.photosbrowser
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -35,7 +36,7 @@ class StartActivity : BaseActivity(),
 //        downloadJsonData.onDownloadCompleteListener(this)
         val url = createUri("https://api.flickr.com/services/feeds/photos_public.gne","Android","en-us",true)
         try {
-            downloadJsonData.execute("https://api.flickr.com/services/feeds/photos_public.gne?tags=android,oreo&format=json&nojsoncallback=1")
+            downloadJsonData.execute("https://api.flickr.com/services/feeds/photos_public.gne?tags=android&format=json&nojsoncallback=1")
         }catch (e:Exception){
             Log.d(TAG,e.message)
         }
@@ -52,6 +53,12 @@ class StartActivity : BaseActivity(),
     override fun onItemClick(view: View, position: Int) {
         Log.d(TAG,"onItemClick Called")
         Toast.makeText(this,"on Click ",Toast.LENGTH_SHORT).show()
+        val photo = adapter.getPhoto(position)
+        if (photo != null ){
+            val intent = Intent(this,DetailsActivity::class.java)
+            intent.putExtra(PHOTO_TRANSFER,photo)
+            startActivity(intent)
+        }
 
     }
 

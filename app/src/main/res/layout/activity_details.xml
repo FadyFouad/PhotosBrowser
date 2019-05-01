@@ -40,18 +40,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <TextView
-                        android:id="@+id/photo_name_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Name"/>
-
 
                 <ImageView
                         android:id="@+id/photo_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_image"/>
+
+                <TextView
+                        android:id="@+id/photo_name_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Name"/>
 
 
                 <TextView
@@ -61,9 +65,10 @@
                         android:text="Author"/>
 
                 <TextView
-                        android:id="@+id/photo_desc_detail"
+                        android:id="@+id/photo_pub_at_detail"
                         android:layout_width="match_parent"
-                        android:text="description"
+                        android:text="Publeshed"
+                        android:gravity="center"
                         android:layout_height="wrap_content"/>
 
             </LinearLayout>
