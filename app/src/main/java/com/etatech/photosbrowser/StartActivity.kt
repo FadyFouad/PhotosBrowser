@@ -3,6 +3,7 @@ package com.etatech.photosbrowser
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager
@@ -50,6 +51,22 @@ class StartActivity : BaseActivity(),
         photos_recyclerView.hasFixedSize()
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        val sharPref = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val query = sharPref.getString(FLICKR_QUERY,"")
+        if (query.isNotEmpty()){
+            val downloadJsonData = DownloadJsonData(this)
+            val url = createUri("https://api.flickr.com/services/feeds/photos_public.gne",query,"en-us",true)
+            try {
+                downloadJsonData.execute("https://api.flickr.com/services/feeds/photos_public.gne?tags=$query&format=json&nojsoncallback=1")
+            }catch (e:Exception){
+                Log.d(TAG,e.message)
+            }
+        }
+    }
+
     override fun onItemClick(view: View, position: Int) {
         Log.d(TAG,"onItemClick Called")
         Toast.makeText(this,"on Click ",Toast.LENGTH_SHORT).show()
