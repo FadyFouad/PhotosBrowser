@@ -102,15 +102,18 @@ class StartActivity : BaseActivity(),
     }
 
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu_start,menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId){
-//            R.id.test -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_start,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.search -> {
+                startActivity(Intent(this,SearchActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
