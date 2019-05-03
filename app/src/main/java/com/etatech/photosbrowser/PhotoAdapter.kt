@@ -27,7 +27,7 @@ class PhotoAdapter(var context: Context, var photos: List<Photo>) :
         if (photos.isNotEmpty())
             return photos.size
         else
-            return 1
+            return photos.size //TODO Should return 1
     }
 
     override fun onBindViewHolder(holder: PhotoAdapter.PhotoViewHolder, position: Int) {
