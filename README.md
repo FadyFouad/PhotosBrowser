@@ -12,6 +12,8 @@ The app has a simple and user-friendly interface, and it allows users to easily 
 - PGet Images From [API Flicker](https://www.flickr.com/photos/tags/flicker/)
 - Navigation through collection of photos with swipe left or right
 - Zoom in and out of photo, pinch to zoom support
+- Circle Image view for display of photo
+
 
 ## Built With
 - Kotlin
